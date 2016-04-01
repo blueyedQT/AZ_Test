@@ -53,6 +53,14 @@ class Investments extends CI_Controller {
 		}
 	}
 
+	public function land() {
+		$this->load->view('az_land');
+	}
+
+	public function contact() {
+		$this->load->view('contact');
+	}
+
 	///////// Basic Structure, not yet using :)
 	public function about() {
 		// $display['title'] = " - About Us";
@@ -68,10 +76,6 @@ class Investments extends CI_Controller {
 
 	public function featured() {
 		$this->load->view('featured');
-	}
-
-	public function contact() {
-		$this->load->view('contact');
 	}
 
 	public function contact_us() {
