@@ -3,7 +3,7 @@
 				<h4>So we can serve your needs better, please fill out this short questionaire:</h4>
 
 <!-- Testing out this bootstrap form -->
-				<form role="form" class="col-md-5" action="contact_us" method="post">
+				<form role="form" class="col-md-5" action="contact_form" method="post">
 <?php 		if(!empty($errors)) { ?>
 			<div class="alert alert-danger" role="alert">
 				<span class="sr-only">Error:</span>

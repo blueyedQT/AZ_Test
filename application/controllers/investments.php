@@ -58,7 +58,31 @@ class Investments extends CI_Controller {
 	}
 
 	public function contact() {
+		$display = $this->session->flashdata('errors');
+
 		$this->load->view('contact');
+	}
+
+	public function contact_form() {
+		// ## Want to have it dsplay a success message on the form page ##
+		// ## Load View? or Redirect Back? ##
+		// var_dump($this->input->post());
+		// die('Contact Form');
+		// ## Form Validations ##
+		// ## Need to find out what she is wanting to be required  (example either phone or email) ##
+		$this->form_validation->set_rules('name', 'Name', 'trim|min_length[2]|max+length[15]|xss_clean');
+		$this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
+		// $this->form_validation->set_rules('phone', 'Phone Number', 'valid_phone_number_or_empty');
+		if($this->form_validation->run() == FALSE) {
+			$this->view_data['errors'] = validation_errors();
+			$this->session->set_flashdata('errors', $this->view_data['errors']);
+					var_dump(validation_errors());
+		die('Errors Back on Contact Form');
+			redirect_back();
+		}
+		// ## If Successful Send and give success message ##
+		// ## if not successful display message ##
+		$this->load->view('contact', $message);
 	}
 
 	///////// Basic Structure, not yet using :)
@@ -78,8 +102,4 @@ class Investments extends CI_Controller {
 		$this->load->view('featured');
 	}
 
-	public function contact_us() {
-		// Want to have it dsplay a success message on the form page
-		$this->load->view('thank_you');
-	}
 }
