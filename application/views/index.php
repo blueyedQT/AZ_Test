@@ -1,4 +1,3 @@
-			<!-- <div id="welcome_image"></div> --> <!-- featured image -->
 			<div class="content">
 
 				<!-- modal practice -->

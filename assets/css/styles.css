@@ -65,38 +65,11 @@ a:hover {
 	background-color: gray;
 }
 
-/*#welcome_image {
-	 background: url(/assets/images/grandcanyon.jpg); 
-	height: 768px;
-	width: 100%;
-}
-*/
 .container {
-	background: url(../images/grandcanyon.jpg);
+	/*Disabled so that it could load faster live for testing*/
+/*	background: url(../images/grandcanyon.jpg);
 	width: 100%;
 	min-height: 500px;
 	background-size: cover;
-	background-repeat: no-repeat;
+	background-repeat: no-repeat;*/
 }
-
-/*form.free_report {
-	text-align: center;
-}*/
-input.email {
-	text-align: center;
-
-}
-
-/*#myModal {
-	height: 200px;
-	width: 300px;
-	background-color: yellow;
-}*/
-
-/*.content {
-	display: block;
-	vertical-align: top;
-	min-height: 400px;
-	padding: 0 35px;
-}
-*/

@@ -3,22 +3,26 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Northern Arizona Investment Property<!--<?php if(!empty($title)) { echo $title; }; ?> --></title>
-		<!-- Just testing out bootstrap, if not need, need to delete allfiles -->
+
+<!-- ## Just testing out bootstrap, if not need, need to delete allfiles ## -->
+<!-- ## IF Bootstap is the choosen option (js or jquery too) I would like to use hosted files, not these links.  These are just for testing purposes ## -->
 <!-- 		<link rel="stylesheet" href="assets/css/bootstrap.min.css"> -->	
 		<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>	
+		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>	
-<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-<script type="text/javascript">
-	$(document).ready(function () {
-		$('#myModal').modal('show');
-	});
-</script>
+<!-- ## Want to make this pop up only on first visit to page if possible, and maybe add a button for the free report if they accidently clicked it away ## -->
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$('#myModal').modal('show');
+			});
+		</script>
+
 		<link rel="stylesheet" type="text/css" href="assets/css/styles.css">
 	</head>
 	<body>

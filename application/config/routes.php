@@ -44,6 +44,7 @@ $route['free_report_signup'] = "investments/free_report_signup";
 $route['free_report'] = "investments/free_report";
 $route['land'] = "investments/land";
 $route['contact'] = "investments/contact";
+$route['contact_form'] = "investments/contact_form";
 
 // $route['about'] = "/investments/about";
 // $route['invest'] = "/investments/invest";
