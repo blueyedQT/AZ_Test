@@ -58,31 +58,27 @@ class Investments extends CI_Controller {
 	}
 
 	public function contact() {
-		$display = $this->session->flashdata('errors');
-
-		$this->load->view('contact');
+		$display['errors'] = $this->session->flashdata('errors');
+		$display['message'] = $this->session->flashdata('message');
+		$this->load->view('contact', $display);
 	}
 
 	public function contact_form() {
 		// ## Want to have it dsplay a success message on the form page ##
 		// ## Load View? or Redirect Back? ##
-		// var_dump($this->input->post());
-		// die('Contact Form');
-		// ## Form Validations ##
-		// ## Need to find out what she is wanting to be required  (example either phone or email) ##
-		$this->form_validation->set_rules('name', 'Name', 'trim|min_length[2]|max+length[15]|xss_clean');
+
+		// ## Need to find out what she is wanting to be required and make as secure as possible! (example either phone or email) ##
+		$this->form_validation->set_rules('name', 'Name', 'trim|min_length[2]|max_length[15]|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
 		$this->form_validation->set_rules('phone', 'Phone Number', 'valid_phone_number_or_empty');
+		$this->form_validation->set_rules('message', 'Message', 'min_length[5]|max_length[150]');
 		if($this->form_validation->run() == FALSE) {
 			$this->view_data['errors'] = validation_errors();
 			$this->session->set_flashdata('errors', $this->view_data['errors']);
-					var_dump(validation_errors());
-		die('Errors Back on Contact Form');
-			redirect_back();
+		} else {
+			$this->session->set_flashdata('message', 'Your message was sent!');
 		}
-		// ## If Successful Send and give success message ##
-		// ## if not successful display message ##
-		$this->load->view('contact', $message);
+		redirect_back();
 	}
 
 	///////// Basic Structure, not yet using :)
