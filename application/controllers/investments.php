@@ -2,14 +2,14 @@
 
 class Investments extends CI_Controller {
 
-	public function __construct() {
-		parent::__construct();
-		$this->load->view('templates/header');
-	}
+	// public function __construct() {
+	// 	parent::__construct();
+	// 	$this->load->view('templates/header');
+	// }
 
 	public function index() {
 		// $display['title'] = " - Welcome";
-		// $this->load->view('templates/header', $display);
+		$this->load->view('templates/header');
 
 		$display['errors'] = $this->session->flashdata('errors');
 		$display['message'] = $this->session->flashdata('message');
@@ -59,11 +59,14 @@ class Investments extends CI_Controller {
 	public function contact() {
 		$display['errors'] = $this->session->flashdata('errors');
 		$display['message'] = $this->session->flashdata('message');
+
+		$this->load->view('templates/header');
+
 		$this->load->view('contact', $display);
 	}
 
 	public function contact_form() {
-		// ## Need to find out what she is wanting to be required and make as secure as possible! (example either phone or email) ##
+		## Need to find out what she is wanting to be required and make as secure as possible! (example either phone or email) ##
 		$this->form_validation->set_rules('name', 'Name', 'trim|min_length[2]|max_length[15]|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
 		$this->form_validation->set_rules('phone', 'Phone Number', 'valid_phone_number_or_empty');
@@ -75,14 +78,20 @@ class Investments extends CI_Controller {
 			// ## Testing EMAIL ##
 			$post = $this->input->post();
 			$this->load->library('email');
+			// ## These can be added to config.php or even made into their own file ##
+			$config = array (
+                  'mailtype' => 'html',
+                  'charset'  => 'utf-8',
+                  'priority' => '1'
+                   );
+			$this->email->initialize($config);
 			$this->email->from($post['email'], $post['name']);
-			$this->email->to('katrina@kursodevelopment.com', 'Contact Us'); 
+			$this->email->to('katrina@kursodevelopment.com', 'Contact Us'); // ## Need to change to actual email address it will be sent to ##
 			$this->email->subject('Contact Form Request');
-			$this->email->message($post['message']);	
+			$body = $this->load->view('emails/contact', $post, true);
+			$this->email->message($body);	
 			$this->email->send();
-
-			echo $this->email->print_debugger();
-			die('Email');
+			echo $this->email->print_debugger(); // ## Debugger
 			// ## End Testing ##
 
 			$this->session->set_flashdata('message', 'Your message was sent!');
