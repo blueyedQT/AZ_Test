@@ -2,14 +2,14 @@
 
 class Investments extends CI_Controller {
 
-	// public function __construct() {
-	// 	parent::__construct();
-	// 	$this->load->view('templates/header');
-	// }
+	public function __construct() {
+		parent::__construct();
+		$this->load->view('templates/header');
+	}
 
 	public function index() {
 		// $display['title'] = " - Welcome";
-		$this->load->view('templates/header');
+		// $this->load->view('templates/header');
 
 		$display['errors'] = $this->session->flashdata('errors');
 		$display['message'] = $this->session->flashdata('message');
@@ -59,9 +59,6 @@ class Investments extends CI_Controller {
 	public function contact() {
 		$display['errors'] = $this->session->flashdata('errors');
 		$display['message'] = $this->session->flashdata('message');
-
-		$this->load->view('templates/header');
-
 		$this->load->view('contact', $display);
 	}
 
@@ -91,7 +88,6 @@ class Investments extends CI_Controller {
 			$body = $this->load->view('emails/contact', $post, true);
 			$this->email->message($body);	
 			$this->email->send();
-			echo $this->email->print_debugger(); // ## Debugger
 			// ## End Testing ##
 
 			$this->session->set_flashdata('message', 'Your message was sent!');
