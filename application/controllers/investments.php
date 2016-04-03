@@ -26,8 +26,7 @@ class Investments extends CI_Controller {
 		} else {
 			$this->load->model('InvestmentModel');
 			$post = $this->input->post();
-			$model = $post;
-			$add_email = $this->InvestmentModel->add_user($model);
+			$add_email = $this->InvestmentModel->add_user($post);
 			if($add_email == FALSE) {
 				$this->session->set_flashdata['errors'] = 'There was a system error, please try again.';
 				redirect('');
@@ -64,9 +63,6 @@ class Investments extends CI_Controller {
 	}
 
 	public function contact_form() {
-		// ## Want to have it dsplay a success message on the form page ##
-		// ## Load View? or Redirect Back? ##
-
 		// ## Need to find out what she is wanting to be required and make as secure as possible! (example either phone or email) ##
 		$this->form_validation->set_rules('name', 'Name', 'trim|min_length[2]|max_length[15]|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email');
@@ -76,10 +72,24 @@ class Investments extends CI_Controller {
 			$this->view_data['errors'] = validation_errors();
 			$this->session->set_flashdata('errors', $this->view_data['errors']);
 		} else {
+			// ## Testing EMAIL ##
+			$post = $this->input->post();
+			$this->load->library('email');
+			$this->email->from($post['email'], $post['name']);
+			$this->email->to('katrina@kursodevelopment.com', 'Contact Us'); 
+			$this->email->subject('Contact Form Request');
+			$this->email->message($post['message']);	
+			$this->email->send();
+
+			echo $this->email->print_debugger();
+			die('Email');
+			// ## End Testing ##
+
 			$this->session->set_flashdata('message', 'Your message was sent!');
 		}
 		redirect_back();
 	}
+
 
 	///////// Basic Structure, not yet using :)
 	public function about() {

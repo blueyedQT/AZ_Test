@@ -18,7 +18,6 @@
 				</div>
 <?php 	} ?>
 
-
 <!-- Testing out this bootstrap form -->
 				<form role="form" class="col-md-5" action="contact_form" method="post">
 					<div class="form-group">
