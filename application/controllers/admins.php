@@ -25,7 +25,8 @@ class Admins extends CI_Controller {
 			if($result != NULL) {
 				$new_data = array (
 					'id' => $result['id'],
-					'logged_in' => true
+					'logged_in' => true,
+					'admin' => true
 					);
 				$this->session->set_userdata($new_data);
 				redirect('admin_dashboard');
@@ -39,8 +40,9 @@ class Admins extends CI_Controller {
 		// ## Check if user is loggedin.  If not direct back to login page, or normal home page ##
 		// ## If logged in, get admin information and display ##
 		// ## Get apporporite other information based on admin level and display ##
-		var_dump($this->session->all_userdata());
-		if($this->session->userdata('logged_in') == true) {
+		$admin = $this->session->all_userdata();
+		var_dump($admin);
+		if($admin['logged_in'] == true && $admin['admin'] == true) {
 					$this->load->view('admin/dashboard');
 		} else {
 			redirect('admin');
@@ -51,7 +53,22 @@ class Admins extends CI_Controller {
 	public function logout() {
 		$this->session->sess_destroy();
 		// ## logout user and destroy session ##
+		$this->session->set_userdata('loggedin', FALSE);
+		$this->session->set_userdata('admin', FALSE);
 		redirect('admin');
+	}
+
+	public function add_admin() {
+		$this->load->view('admin/add_admin');
+	}
+
+	public function add_new_admin() {
+		$post = $this->input->post();
+		$pass = $post['password'];
+		$salt = bin2hex(openssl_random_pseudo_bytes(22));
+		$hash = crypt($pass, $salt);
+		$model['password'] = $hash;
+		var_dump($hash);
 	}
 
 }
