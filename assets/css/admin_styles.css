@@ -33,3 +33,10 @@ body {
 	border-radius: 5px;
 	border: 1px dotted black;
 }
+
+.html_editor {
+	background-color: black;
+	min-height: 100px;
+	width: 500px;
+	color: yellow;
+}

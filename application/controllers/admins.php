@@ -9,11 +9,11 @@ class Admins extends CI_Controller {
 	}
 
 	public function index() {	
-		var_dump($this->session->all_userdata());
+		// var_dump($this->session->all_userdata());
 		// ## Check if logged in and if so redirect to dashboard ##
-		// if($this->session->userdata('loggedin') == true) {
-		// 	redirect('admin_dashboard');
-		// }
+		if($this->session->userdata('loggedin') == true) {
+			redirect('admin_dashboard');
+		}
 		$display['errors'] = $this->session->flashdata('errors');
 		$this->load->view('admin/login', $display);
 	}
@@ -31,6 +31,7 @@ class Admins extends CI_Controller {
 			if($admin != NULL) {
 				if(crypt($password, $admin['password']) == $admin['password']) {
 					$new_data = array (
+						'name' => $admin['first_name'],
 						'id' => $admin['id'],
 						'loggedin' => true,
 						'admin' => true
@@ -50,15 +51,16 @@ class Admins extends CI_Controller {
 		// ## If logged in, get admin information and display ##
 		// ## Get apporporite other information based on admin level and display ##
 		$admin = $this->session->all_userdata();
-		var_dump($admin);
+		// var_dump($admin);
 		if($admin['loggedin'] == true && $admin['admin'] == true) {
 					$this->load->model('AdminModel');
 					$display['admins'] = $this->AdminModel->get_admins();
+					$display['name'] = $this->session->userdata('name');
+					$display['id'] = $this->session->userdata('id');
 					$this->load->view('admin/dashboard', $display);
 		} else {
 			redirect('admin');
 		}
-
 	}
 
 	public function logout() {
@@ -69,12 +71,18 @@ class Admins extends CI_Controller {
 	}
 
 	public function add_admin() {
+		if($this->session->userdata('admin') !== true && $this->session->userdata('loggedin') !== true) {
+			redirect('admin');
+		}
 		$display['errors'] = $this->session->flashdata('errors');
 		$this->load->view('admin/add_admin', $display);
 	}
 
 	public function register_admin() {
 // ## Validations! ##
+		if($this->session->userdata('admin') !== true && $this->session->userdata('loggedin') !== true) {
+			redirect('admin');
+		}
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[2]');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[2]');
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
@@ -102,6 +110,9 @@ class Admins extends CI_Controller {
 	}
 
 	public function edit_admin($id) {
+		if($this->session->userdata('admin') !== true && $this->session->userdata('loggedin') !== true) {
+			redirect('admin');
+		}
 		$this->load->model('AdminModel');
 		$display['admin'] = $this->AdminModel->get_admin($id);
 		$display['errors'] = $this->session->flashdata('errors');
@@ -109,6 +120,9 @@ class Admins extends CI_Controller {
 	}
 
 	public function update_admin() {
+		if($this->session->userdata('admin') !== true && $this->session->userdata('loggedin') !== true) {
+			redirect('admin');
+		}
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[2]');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[2]');
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
@@ -117,10 +131,19 @@ class Admins extends CI_Controller {
 			$post['admin'] = $this->session->userdata('id');
 			$this->load->model('AdminModel');
 			$result = $this->AdminModel->update_admin($post);
+			if($result == true) {
+				redirect('admin_dashboard');
+			} else {
+				$this->set->flashdata('errors', 'There was an error, please try again');
+				redirect_back();
+			}
 		}
 	}
 
 	public function delete_admin($id) {
+		if($this->session->userdata('admin') !== true && $this->session->userdata('loggedin') !== true) {
+			redirect('admin');
+		}
 		$this->load->model('AdminModel');
 		$result = $this->AdminModel->delete_admin($id);
 		if($result == true) {
