@@ -51,7 +51,7 @@ $route['admin_login'] = "admins/login";
 $route['admin_dashboard'] = "admins/dashboard";
 $route['logout'] = "admins/logout";
 $route['add_admin'] = "admins/add_admin";
-$route['add_new_admin'] = "admins/add_new_admin";
+$route['register_admin'] = "admins/register_admin";
 
 // $route['about'] = "/investments/about";
 // $route['invest'] = "/investments/invest";

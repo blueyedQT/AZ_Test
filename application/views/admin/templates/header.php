@@ -15,21 +15,15 @@
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>	
 		<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
-		<link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
+		<link rel="stylesheet" type="text/css" href="../assets/css/admin_styles.css">
 	</head>
 	<body>
 			<div id="header">
-				<div id="header_top"><img id="kw" src="assets/images/kwlogo.jpg"></div>
+				<div id="header_top"></div>
 				<ul class="navigation_bar">
-					<li class="nav_links"><a href="index">Home</a></li><!-- correcting space
-				 --><li class="nav_links"><a href="land">View AZ Land For Sale</a></li><!-- correcting space
-				 --><li class="nav_links"><a href="http://northazre.com" target="_blank">Search</a></li><!-- correcting space
-				 --><li class="nav_links"><a href="#">Resources</a></li><!-- correcting space
-				 --><li class="nav_links"><a href="#">About Us</a></li><!-- correcting space
-				 --><li class="nav_links"><a href="contact">Contact Us</a></li><!-- correcting space
-				 --><li class="nav_links"><a href="#">Blog</a></li><!-- correcting space
-				 --><li class="nav_links"><a href="#">Advertise Your Land Here</a></li>
+<?php if($loggedin == true) { ?>
+					<a class="btn btn-primary" href="logout" role="button">Logout</a>
+<?php } ?>
 				</ul>
 			</div>
 			<div class="container">
-				<h1>ADMIN!</h1>

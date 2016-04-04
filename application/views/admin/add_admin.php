@@ -1,7 +1,9 @@
 			<div class="content">
  				<h1>Welcome to the Add Admin Page!</h1>
-				<a class="btn btn-primary" href="logout" role="button">Logout</a>
-				<form role="form" action="add_new_admin" method="post">
+				<form role="form" action="register_admin" method="post">
+<?php if(!empty($errors)) {
+	var_dump($errors);
+} ?>
  					<fieldset class="form-group">
 				    <label for="username">Username</label>
 				    <input type="text" class="form-control" id="username" name="username" placeholder="Your Name Here">

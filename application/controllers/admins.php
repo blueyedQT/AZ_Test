@@ -4,12 +4,16 @@ class Admins extends CI_Controller {
 
 	public function __construct() {
 		parent::__construct();
-		$this->load->view('admin/templates/header');
+		$display['loggedin'] = $this->session->userdata('loggedin');
+		$this->load->view('admin/templates/header', $display);
 	}
 
 	public function index() {	
 		var_dump($this->session->all_userdata());
 		// ## Check if logged in and if so redirect to dashboard ##
+		// if($this->session->userdata('loggedin') == true) {
+		// 	redirect('admin_dashboard');
+		// }
 		$display['errors'] = $this->session->flashdata('errors');
 		$this->load->view('admin/login', $display);
 	}
@@ -20,16 +24,21 @@ class Admins extends CI_Controller {
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		if($this->form_validation->run() == TRUE) {
 			$post = $this->input->post();
+			$username = $post['username'];
+			$password = $post['password'];
 			$this->load->model('AdminModel');
-			$result = $this->AdminModel->check_login($post);
-			if($result != NULL) {
-				$new_data = array (
-					'id' => $result['id'],
-					'logged_in' => true,
-					'admin' => true
-					);
-				$this->session->set_userdata($new_data);
-				redirect('admin_dashboard');
+			$admin = $this->AdminModel->check_login($username);
+			if($admin != NULL) {
+				if(crypt($password, $admin['password']) == $admin['password']) {
+					$new_data = array (
+						'id' => $result['id'],
+						'loggedin' => true,
+						'admin' => true
+						);
+				// ## Also want to be sure that I am using sessions in the most secure way possible ##
+					$this->session->set_userdata($new_data);
+					redirect('admin_dashboard');
+				}
 			} 		
 		}
 		$this->session->set_flashdata('errors', 'Incorrect Login');
@@ -42,8 +51,10 @@ class Admins extends CI_Controller {
 		// ## Get apporporite other information based on admin level and display ##
 		$admin = $this->session->all_userdata();
 		var_dump($admin);
-		if($admin['logged_in'] == true && $admin['admin'] == true) {
-					$this->load->view('admin/dashboard');
+		if($admin['loggedin'] == true && $admin['admin'] == true) {
+					$this->load->model('AdminModel');
+					$display['admins'] = $this->AdminModel->get_admins();
+					$this->load->view('admin/dashboard', $display);
 		} else {
 			redirect('admin');
 		}
@@ -59,16 +70,34 @@ class Admins extends CI_Controller {
 	}
 
 	public function add_admin() {
-		$this->load->view('admin/add_admin');
+		$display['errors'] = $this->session->flashdata('errors');
+		$this->load->view('admin/add_admin', $display);
 	}
 
-	public function add_new_admin() {
-		$post = $this->input->post();
-		$pass = $post['password'];
-		$salt = bin2hex(openssl_random_pseudo_bytes(22));
-		$hash = crypt($pass, $salt);
-		$model['password'] = $hash;
-		var_dump($hash);
+	public function register_admin() {
+		// ## Validations! ##
+		$this->form_validation->set_rules('username', 'Username', 'trim|required');
+		$this->form_validation->set_rules('password', 'Password', 'trim|required');
+		if($this->form_validation->run() == TRUE) {
+			$post = $this->input->post();
+			// ## Double Check Password? ##
+			// ## Check Session and redirect if no
+			$post = $this->input->post();
+			$pass = $post['password'];
+			$salt = bin2hex(openssl_random_pseudo_bytes(22));
+			$hash = crypt($pass, $salt);
+
+			$model['password'] = $hash;
+			$model['username'] = $post['username'];
+
+			$this->load->model('AdminModel');
+			$new_admin = $this->AdminModel->register_admin($model);
+			if($new_admin == FALSE) {
+				$this->session->set_flashdata['errors'] = 'There was a system error, please try again.';
+				redirect('add_admin');
+			}
+		}
+		redirect('admin_dashboard');	
 	}
 
 }
