@@ -54,6 +54,7 @@ $route['add_admin'] = "admins/add_admin";
 $route['register_admin'] = "admins/register_admin";
 $route['edit_admin/(:num)'] = "admins/edit_admin/$1";
 $route['update_admin'] = "admins/update_admin";
+$route['delete_admin/(:num)'] = "admins/delete_admin/$1";
 
 // $route['about'] = "/investments/about";
 // $route['invest'] = "/investments/invest";

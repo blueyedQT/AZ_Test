@@ -103,8 +103,9 @@ class Admins extends CI_Controller {
 
 	public function edit_admin($id) {
 		$this->load->model('AdminModel');
-		$admin = $this->AdminModel->get_admin($id);
-		$this->load->view('admin/edit_admin', $admin);
+		$display['admin'] = $this->AdminModel->get_admin($id);
+		$display['errors'] = $this->session->flashdata('errors');
+		$this->load->view('admin/edit_admin', $display);
 	}
 
 	public function update_admin() {
@@ -119,9 +120,15 @@ class Admins extends CI_Controller {
 		}
 	}
 
-	public function remove_admin() {
-		$post = $this->input->post();
-		var_dump($post);
+	public function delete_admin($id) {
+		$this->load->model('AdminModel');
+		$result = $this->AdminModel->delete_admin($id);
+		if($result == true) {
+			redirect('admin_dashboard');
+		} else {
+			$this->set->flashdata('errors', 'There was an error, please try again');
+			redirect_back();
+		}
 	}
 
 }

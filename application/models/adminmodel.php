@@ -30,4 +30,9 @@ class AdminModel extends CI_Model {
 		$values = array($data['first_name'], $data['last_name'], $data['admin'], $data['id']);
 		return $this->db->query($query, $values);
 	}
+
+	public function delete_admin($id) {
+		$query = "DELETE FROM admin WHERE id = $id";
+		return $this->db->query($query);
+	}
 }
