@@ -3,6 +3,7 @@
 <!-- ## Display Admin Name and Welcome Message ## -->
 <!-- ## Change Modal Text ## -->
 <!-- ## Upload, view, select PDF for report! ## -->
+			<a class="btn btn-primary" href="logout" role="button">Logout</a>
 			</div>
 		</div><!-- closing container -->
 	</body>

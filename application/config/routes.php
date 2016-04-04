@@ -49,6 +49,7 @@ $route['contact_form'] = "investments/contact_form";
 $route['admin'] = "admins/index";
 $route['admin_login'] = "admins/login";
 $route['admin_dashboard'] = "admins/dashboard";
+$route['logout'] = 'admins/logout';
 
 // $route['about'] = "/investments/about";
 // $route['invest'] = "/investments/invest";

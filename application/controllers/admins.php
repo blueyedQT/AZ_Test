@@ -8,6 +8,8 @@ class Admins extends CI_Controller {
 	}
 
 	public function index() {	
+		var_dump($this->session->all_userdata());
+		// ## Check if logged in and if so redirect to dashboard ##
 		$display['errors'] = $this->session->flashdata('errors');
 		$this->load->view('admin/login', $display);
 	}
@@ -21,6 +23,11 @@ class Admins extends CI_Controller {
 			$this->load->model('AdminModel');
 			$result = $this->AdminModel->check_login($post);
 			if($result != NULL) {
+				$new_data = array (
+					'id' => $result['id'],
+					'logged_in' => true
+					);
+				$this->session->set_userdata($new_data);
 				redirect('admin_dashboard');
 			} 		
 		}
@@ -30,7 +37,21 @@ class Admins extends CI_Controller {
 
 	public function dashboard() {
 		// ## Check if user is loggedin.  If not direct back to login page, or normal home page ##
-		$this->load->view('admin/dashboard');
+		// ## If logged in, get admin information and display ##
+		// ## Get apporporite other information based on admin level and display ##
+		var_dump($this->session->all_userdata());
+		if($this->session->userdata('logged_in') == true) {
+					$this->load->view('admin/dashboard');
+		} else {
+			redirect('admin');
+		}
+
+	}
+
+	public function logout() {
+		$this->session->sess_destroy();
+		// ## logout user and destroy session ##
+		redirect('admin');
 	}
 
 }
