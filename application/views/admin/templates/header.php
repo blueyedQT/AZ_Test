@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>Admin - Northern Arizona Investment Property<!--<?php if(!empty($title)) { echo $title; }; ?> --></title>
+		<title>Admin - Northern Arizona Investment Property</title>
 
 <!-- ## Just testing out bootstrap, if not need, need to delete allfiles ## -->
 <!-- ## IF Bootstap is the choosen option (js or jquery too) I would like to use hosted files, not these links.  These are just for testing purposes ## -->
@@ -32,3 +32,4 @@
 				</ul>
 			</div>
 			<div class="container">
+				<h1>ADMIN!</h1>
