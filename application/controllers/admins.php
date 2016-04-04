@@ -31,7 +31,7 @@ class Admins extends CI_Controller {
 			if($admin != NULL) {
 				if(crypt($password, $admin['password']) == $admin['password']) {
 					$new_data = array (
-						'id' => $result['id'],
+						'id' => $admin['id'],
 						'loggedin' => true,
 						'admin' => true
 						);
@@ -76,6 +76,8 @@ class Admins extends CI_Controller {
 
 	public function register_admin() {
 		// ## Validations! ##
+		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[2]');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[2]');
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		if($this->form_validation->run() == TRUE) {
@@ -87,8 +89,9 @@ class Admins extends CI_Controller {
 			$salt = bin2hex(openssl_random_pseudo_bytes(22));
 			$hash = crypt($pass, $salt);
 
+			$model = $post;
 			$model['password'] = $hash;
-			$model['username'] = $post['username'];
+			$model['admin'] = $this->session->userdata('id');
 
 			$this->load->model('AdminModel');
 			$new_admin = $this->AdminModel->register_admin($model);
@@ -98,6 +101,11 @@ class Admins extends CI_Controller {
 			}
 		}
 		redirect('admin_dashboard');	
+	}
+
+	public function remove_admin() {
+		$post = $this->input->post();
+		var_dump($post);
 	}
 
 }

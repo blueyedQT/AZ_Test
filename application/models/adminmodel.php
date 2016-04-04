@@ -14,8 +14,8 @@ class AdminModel extends CI_Model {
 	}
 
 	public function register_admin($data) {
-		$query = "INSERT INTO admin (username, password, created_at) VALUES (?, ?, CURRENT_TIMESTAMP)";
-		$values = array($data['username'], $data['password']);
+		$query = "INSERT INTO admin (first_name, last_name, username, password, created_at, created_by, updated_by) VALUES (?, ?, ?, ?, CURRENT_TIMESTAMP, ?, ?)";
+		$values = array($data['first_name'], $data['last_name'], $data['username'], $data['password'], $data['admin'], $data['admin']);
 		$this->db->query($query, $values);
 		return $this->db->insert_id();
 	}
