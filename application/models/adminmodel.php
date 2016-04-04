@@ -19,4 +19,15 @@ class AdminModel extends CI_Model {
 		$this->db->query($query, $values);
 		return $this->db->insert_id();
 	}
+
+	public function get_admin($id) {
+		$query = "SELECT * FROM admin WHERE id = $id";
+		return $this->db->query($query)->row_array();
+	}
+
+	public function update_admin($data) {
+		$query = "UPDATE admin SET first_name = ?, last_name = ?, updated_by = ? WHERE id = ?";
+		$values = array($data['first_name'], $data['last_name'], $data['admin'], $data['id']);
+		return $this->db->query($query, $values);
+	}
 }

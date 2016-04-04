@@ -6,7 +6,7 @@
 <!-- ### Display All Admin By Name and Admin Level ## -->
 	 					<h3>Admins</h3>
 <?php 	foreach($admins as $admin) { ?>
-						<p><?php echo $admin['username'] ?></p>
+						<a href="edit_admin/<?php echo $admin['id'] ?>"><p><?php echo $admin['first_name'] ?> <?php echo $admin['last_name']?></p></a>
 <?php 	} ?>
 					</div>
 					

@@ -62,10 +62,9 @@ class Admins extends CI_Controller {
 	}
 
 	public function logout() {
-		$this->session->sess_destroy();
-		// ## logout user and destroy session ##
 		$this->session->set_userdata('loggedin', FALSE);
 		$this->session->set_userdata('admin', FALSE);
+		$this->session->sess_destroy();		
 		redirect('admin');
 	}
 
@@ -75,13 +74,12 @@ class Admins extends CI_Controller {
 	}
 
 	public function register_admin() {
-		// ## Validations! ##
+// ## Validations! ##
 		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[2]');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[2]');
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		if($this->form_validation->run() == TRUE) {
-			$post = $this->input->post();
 			// ## Double Check Password? ##
 			// ## Check Session and redirect if no
 			$post = $this->input->post();
@@ -101,6 +99,24 @@ class Admins extends CI_Controller {
 			}
 		}
 		redirect('admin_dashboard');	
+	}
+
+	public function edit_admin($id) {
+		$this->load->model('AdminModel');
+		$admin = $this->AdminModel->get_admin($id);
+		$this->load->view('admin/edit_admin', $admin);
+	}
+
+	public function update_admin() {
+		$this->form_validation->set_rules('first_name', 'First Name', 'trim|required|min_length[2]');
+		$this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|min_length[2]');
+		$this->form_validation->set_rules('username', 'Username', 'trim|required');
+		if($this->form_validation->run() == true) {
+			$post = $this->input->post();
+			$post['admin'] = $this->session->userdata('id');
+			$this->load->model('AdminModel');
+			$result = $this->AdminModel->update_admin($post);
+		}
 	}
 
 	public function remove_admin() {
