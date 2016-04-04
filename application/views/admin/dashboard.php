@@ -1,6 +1,5 @@
 			<div class="content">
  				<h1>Welcome <?php echo $name ?>, to the AZTest Admin Dashboard!</h1>
- 				<a class="btn btn-success" href="edit_admin/<?php echo $id ?>" role="button">Edit My Info</a>
  				
 <!-- ### Display All Admin By Name and Admin Level ## -->
  				<div class="row">
@@ -11,8 +10,18 @@
 						<a href="edit_admin/<?php echo $admin['id'] ?>"><p><?php echo $admin['first_name'] ?> <?php echo $admin['last_name']?></p></a>
 <?php 		}
 				} ?>
+						<a class="btn btn-warning" href="add_admin" role="button">Add Admin</a>
+						<a class="btn btn-success" href="edit_admin/<?php echo $id ?>" role="button">Edit My Info</a>
 					</div>
-					<a class="btn btn-warning col-md-2 col-md-offset-1" href="add_admin" role="button">Add Admin</a>
+
+				<!-- ## Add Property Link ## -->
+					<div class="dashboard col-md-4 col-md-offset-1">
+						<h3>Properties</h3>
+<?php foreach($properties as $property) { ?>
+						<p><?= $property['address']?> <?= $property['city'] ?></p>
+<?php } ?>
+						<a class="btn btn-success" href="add_property" role="button">Add A New Property</a>
+					</div>
 				</div>
 
 <!-- ## Change Modal Text ## -->

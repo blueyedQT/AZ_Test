@@ -55,6 +55,11 @@ $route['register_admin'] = "admins/register_admin";
 $route['edit_admin/(:num)'] = "admins/edit_admin/$1";
 $route['update_admin'] = "admins/update_admin";
 $route['delete_admin/(:num)'] = "admins/delete_admin/$1";
+// TESTING
+$route['add_property'] = "admins/add_property";
+$route['add_new_property'] = "admins/add_new_property";
+
+// $route['add_property'] = "properties/add_property";
 
 // $route['about'] = "/investments/about";
 // $route['invest'] = "/investments/invest";

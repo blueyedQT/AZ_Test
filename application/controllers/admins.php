@@ -57,6 +57,10 @@ class Admins extends CI_Controller {
 					$display['admins'] = $this->AdminModel->get_admins();
 					$display['name'] = $this->session->userdata('name');
 					$display['id'] = $this->session->userdata('id');
+
+					$this->load->model('PropertyModel');
+					$display['properties'] = $this->PropertyModel->get_properties();
+
 					$this->load->view('admin/dashboard', $display);
 		} else {
 			redirect('admin');
@@ -152,6 +156,22 @@ class Admins extends CI_Controller {
 			$this->set->flashdata('errors', 'There was an error, please try again');
 			redirect_back();
 		}
+	}
+
+// TESTING
+	public function add_property() {
+		$this->load->model('PropertyModel');
+		$display['cities'] = $this->PropertyModel->get_cities();
+		$this->load->view('properties/add_property', $display);
+	}
+
+	public function add_new_property() {
+		// ## VALIDATIONS ##
+		$model = $this->input->post();
+		$model['admin'] = $this->session->userdata('id');
+		$this->load->model('PropertyModel');
+		$result = $this->PropertyModel->add_property($model);
+		var_dump($result);
 	}
 
 }
