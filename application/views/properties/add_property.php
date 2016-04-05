@@ -1,9 +1,6 @@
 			<div class="content">
  				<h1>Welcome to the Add Property Page!</h1>
-				<form role="form" action="add_new_property" method="post">
-<?php if(!empty($errors)) {
-	var_dump($errors);
-} ?>
+				<form role="form" action="add_new_property" method="post" enctype="multipart/form-data">
 					<fieldset class="form-group">
 				    <label for="address1">Address</label>
 				    <input type="text" class="form-control" id="address" name="address1" placeholder="1234 Your Street">
@@ -21,7 +18,10 @@
 <?php 	} ?>
 						</select>
 					</fieldset>
-				  <button type="submit" class="btn btn-primary">Add Property!</button>
+					<fieldset class="form-group">
+						<input type="file" name="userfile" />
+	    		</fieldset>
+					<button type="submit" class="btn btn-primary">Add Property!</button>
 				</form>
 			</div>
 		</div><!-- closing container -->
