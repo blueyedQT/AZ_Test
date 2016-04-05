@@ -17,8 +17,13 @@
 				<!-- ## Add Property Link ## -->
 					<div class="dashboard col-md-4 col-md-offset-1">
 						<h3>Properties</h3>
-<?php foreach($properties as $property) { ?>
-						<p><?= $property['address']?> <?= $property['city'] ?></p>
+<?php 	foreach($properties as $property) { ?>
+						<p>
+<?php 		if($property['image']) { ?>
+							<img src="uploads/images/<?= $property['image'] ?>">
+<?php 		} ?>
+<?php  		echo $property['address']?> <?= $property['city'] ?>
+						</p>
 <?php } ?>
 						<a class="btn btn-success" href="add_property" role="button">Add A New Property</a>
 					</div>

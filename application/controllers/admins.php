@@ -168,8 +168,6 @@ class Admins extends CI_Controller {
 	public function add_new_property() {
 		// ## VALIDATIONS ##
 		$model = $this->input->post();
-		// var_dump($model);
-		// die('Is it here');
 		$model['admin'] = $this->session->userdata('id');
 
 		$config['encrypt_name'] = TRUE;
@@ -189,15 +187,15 @@ class Admins extends CI_Controller {
     }
     else
     {
-      echo 'uploaded';
-      $this->data['upload_data'] = $this->upload->data();
+      $image = $this->upload->data();
+      $model['image'] = $image['file_name'];
     }
-    die('Did it Work?');
-
 		$this->load->model('PropertyModel');
 
 		$result = $this->PropertyModel->add_property($model);
-		var_dump($result);
+		if($result > 0 ) {
+			redirect('admin_dashboard');
+		}
 	}
 
 }
