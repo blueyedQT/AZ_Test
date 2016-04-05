@@ -15,4 +15,14 @@ class MY_Form_Validation extends CI_Form_validation {
 			}
 		}
 	}
+
+	function select_validate($value) {
+		if($value=="none"){
+			$this->set_message('select_validate', 'Please select a city.');
+			return false;
+		} else{
+			return true;
+		}
+	}
+
 }

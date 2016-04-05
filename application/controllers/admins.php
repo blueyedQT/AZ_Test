@@ -160,6 +160,8 @@ class Admins extends CI_Controller {
 
 // TESTING
 	public function add_property() {
+		$display['errors'] = $this->session->flashdata('errors');
+		var_dump($this->session->flashdata('errors'));
 		$this->load->model('PropertyModel');
 		$display['cities'] = $this->PropertyModel->get_cities();
 		$this->load->view('properties/add_property', $display);
@@ -167,6 +169,16 @@ class Admins extends CI_Controller {
 
 	public function add_new_property() {
 		// ## VALIDATIONS ##
+		$this->form_validation->set_rules('address1', 'Address', 'required|min_length[2]');
+		$this->form_validation->set_rules('address2', 'Address 2', 'min_length[1]');
+		$this->form_validation->set_rules('city', 'City', 'required|select_validate');
+		if($this->form_validation->run() == false) {
+			$this->view_data['errors'] = validation_errors();
+			$this->session->set_flashdata('errors', $this->view_data['errors']);
+			redirect_back();
+		}
+
+		
 		$model = $this->input->post();
 		$model['admin'] = $this->session->userdata('id');
 
@@ -193,9 +205,12 @@ class Admins extends CI_Controller {
 		$this->load->model('PropertyModel');
 
 		$result = $this->PropertyModel->add_property($model);
-		if($result > 0 ) {
+		if($result == true) {
 			redirect('admin_dashboard');
 		}
 	}
+
+	// ## Not sure where to put this currently
+
 
 }

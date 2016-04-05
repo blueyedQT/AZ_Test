@@ -19,6 +19,7 @@ class Investments extends CI_Controller {
 	public function free_report_signup() {
 		$this->form_validation->set_rules('first_name', 'Name', 'trim|min_length[2]|max+length[15]|xss_clean');
 		$this->form_validation->set_rules('email', 'Email Address', 'trim|required|valid_email|is_unique[users.email]');
+		$this->form_validation->set_rules('city', 'City', 'required');
 		if($this->form_validation->run() == FALSE) {
 			$this->view_data['errors'] = validation_errors();
 			$this->session->set_flashdata('errors', $this->view_data['errors']);
