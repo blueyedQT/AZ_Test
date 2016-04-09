@@ -36,7 +36,8 @@
 				 --><li class="nav_links"><a href="#">About Us</a></li><!-- correcting space
 				 --><li class="nav_links"><a href="contact">Contact Us</a></li><!-- correcting space
 				 --><li class="nav_links"><a href="#">Blog</a></li><!-- correcting space
-				 --><li class="nav_links"><a href="#">Advertise Your Land Here</a></li>
+				 --><li class="nav_links"><a href="#">Advertise Your Land Here</a></li><!-- correcting space
+				--><li class="nav_links"><a href="#">FAQs</a></li>
 				</ul>
 			</div>
 			<div class="container">

@@ -1,6 +1,6 @@
 			<div class="content">
 				<h1>Contact Us</h1>
-				<h4>So we can serve your needs better, please fill out this short questionaire:</h4>
+				<h4>For a FREE personal consultation from our trained staff, please fill out this short questionnaire so we can serve your needs better...</h4>
 
 <! -- Error messages -- >
 <?php 	if(!empty($errors)) { ?>
