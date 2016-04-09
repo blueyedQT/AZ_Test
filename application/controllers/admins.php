@@ -11,6 +11,12 @@ class Admins extends CI_Controller {
 	public function index() {	
 		// var_dump($this->session->all_userdata());
 		// ## Check if logged in and if so redirect to dashboard ##
+
+// ## Just for development ## //
+		$this->load->model('AdminModel');
+		$result = $this->AdminModel->any_admin();
+// ## End Development ##//
+
 		if($this->session->userdata('loggedin') == true) {
 			redirect('admin_dashboard');
 		}

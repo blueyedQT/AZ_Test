@@ -1,6 +1,6 @@
 			<div class="content">
  				<h1>Welcome to the Edit Admin Page!</h1>
-				<form role="form" action="/update_admin" method="post">
+				<form role="form" action="<?php echo base_url('/update_admin') ?>" method="post">
 <?php if(!empty($errors)) {
 				var_dump($errors);
 			} ?>
@@ -19,7 +19,7 @@
 				  <input type="hidden" name="id" value="<?php echo $admin['id']?>">
 				  <button type="submit" class="btn btn-primary">Edit!</button>
 				</form>
-				<a class="delete" href="/delete_admin/<?php echo $admin['id'] ?>">Delete This Admin</a></td>
+				<a class="delete" href="<?php echo base_url('/delete_admin/' . $admin['id']) ?>">Delete This Admin</a></td>
 			</div>
 		</div><!-- closing container -->
 	</body>
